@@ -149,6 +149,10 @@ def create_provider(file: UploadFile = File(...), name: str = "", _ = Depends(ve
     return providers.find_one({"name": name}, {"_id": 0, "name": 1, "version": 1})
 
 
+@app.get("/users/login")
+def login(_ = Depends(verifyUserPassword)):
+    return {"success": True}
+
 # USERS (meant for admin controls, hence why posting is protected)
 class UserCreationDto(BaseModel):
     username: str
